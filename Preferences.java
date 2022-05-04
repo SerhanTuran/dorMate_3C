@@ -8,9 +8,9 @@ public class Preferences {
     public void setBedTime(int bedTime){
         preferences[0] = bedTime;
     }
-    //index 1 = lights
-    public void setLights(int lights){
-        preferences[1] = lights;
+    //index 1 = phonecall
+    public void setPhonecall(int phonecall){
+        preferences[1] = phonecall;
     }
     //index 2 = eating habits
     public void setEatingFrequency(int eatingFrequency){
