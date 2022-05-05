@@ -247,7 +247,7 @@ public class EditPreferences extends javax.swing.JFrame {
     }// </editor-fold>                        
 
     protected void playingGamesChooserActionPerformed(ActionEvent evt) {
-        String playingGamesS = evt.getActionCommand();                                            
+        String playingGamesS = playingGamesChooser.getSelectedItem().toString();                                            
         if(playingGamesS.equals("I don't like playing video games."))
         {
             p.setGamingFrequency(0);
@@ -264,7 +264,7 @@ public class EditPreferences extends javax.swing.JFrame {
     }
 
     private void bedTimeChooserActionPerformed(java.awt.event.ActionEvent evt) {                                               
-        String bedTimeS = evt.getActionCommand();                                            
+        String bedTimeS = bedTimeChooser.getSelectedItem().toString();                                            
         if(bedTimeS.equals("Before 10.00 p.m"))
         {
             p.setBedTime(0);
@@ -281,7 +281,7 @@ public class EditPreferences extends javax.swing.JFrame {
     }                                              
 
     private void eatingChooserActionPerformed(java.awt.event.ActionEvent evt) {                                              
-        String eatingChooserS = evt.getActionCommand();
+        String eatingChooserS = eatingChooser.getSelectedItem().toString();
         if(eatingChooserS.equals("I never use dorm kitchen and room for eating."))
         {
             p.setEatingFrequency(0);
@@ -297,7 +297,7 @@ public class EditPreferences extends javax.swing.JFrame {
     }  
 
     private void phoneCallChooserActionPerformed(java.awt.event.ActionEvent evt) {                                                 
-        String phoneCallS = evt.getActionCommand();
+        String phoneCallS = phoneCallChooser.getSelectedItem().toString();
         if(phoneCallS.equals("I go out when my phone rings."))
         {
             p.setPhonecall(0);
@@ -313,7 +313,7 @@ public class EditPreferences extends javax.swing.JFrame {
     }                                                
 
     private void studyingChooserActionPerformed(java.awt.event.ActionEvent evt) {                                                
-        String studyingS = evt.getActionCommand();
+        String studyingS = studyingChooser.getSelectedItem().toString();
         if(studyingS.equals("I never use the room for studying."))
         {
             p.setStudyFrequency(0);
