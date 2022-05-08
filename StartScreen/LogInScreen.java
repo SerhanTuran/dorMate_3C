@@ -1,13 +1,8 @@
 package StartScreen;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,9 +10,12 @@ import java.awt.Color;
  */
 public class LogInScreen extends javax.swing.JFrame {
 
-    Connection con;
-    
+    private static int userID = -1; //importante
+    DatabaseHandler db = null;
+        
     public LogInScreen() {
+        
+        db = DatabaseHandler.getInstance();
         initComponents();
         if(mailField.getText().isEmpty()){
             mailField.setText("Write Your Email");
@@ -27,23 +25,7 @@ public class LogInScreen extends javax.swing.JFrame {
             passwordField.setText("Write Your Password");
             passwordField.setForeground(Color.gray);
         }
-    }
-    
-
-    void createConnection(){
-        try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/dormate.deneme","root","1234");
-            System.out.println("Database connection successed!");
-            Statement stat = con.createStatement();
-            ResultSet rs = stat.executeQuery("SELECT * FROM USERS WHERE user_email like '"+mailField.getText()+"' and user_password like '"+passwordField.getText()+"'");
-            while(rs.next()){
-                String name = rs.getString("user_name");
-                System.out.print(name);
-            }
-        }catch (SQLException ex) {
-            System.out.println("bum");
-            Logger.getLogger(ConnectionDb.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
     }
     
     
@@ -184,24 +166,24 @@ public class LogInScreen extends javax.swing.JFrame {
 
     private void logInButtonActionPerformed(java.awt.event.ActionEvent evt) {                                            
 
-        try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/dormate.deneme","root","1234");
-            System.out.println("Database connection successed!");
-            Statement stat = con.createStatement();
-            ResultSet rs = stat.executeQuery("SELECT * FROM USERS WHERE user_email like '"+mailField.getText()+"' and user_password like '"+passwordField.getText()+"'");
-            while(rs.next()){
-                User user = new User(rs.getString("user_name"), rs.getString("user_email"), rs.getString("user_password"));
-                user.setSurname("user_surname");
-                user.setAge(rs.getInt("user_age"));
-                user.setGender(rs.getString("user_gender"));
-                System.out.print(user);
-            }
-        }catch (SQLException ex) {
-            System.out.println("bum");
-            Logger.getLogger(ConnectionDb.class.getName()).log(Level.SEVERE, null, ex);
+        if((userID = db.checkCredential(mailField.getText(), passwordField.getText())) >  0){
+            JOptionPane.showMessageDialog(null, "Welcome "+db.getUsersName(userID)+" !", "Welcome", JOptionPane.INFORMATION_MESSAGE);
+            Profile main = new Profile(userID);
+            main.pack();
+            main.setLocationRelativeTo(null);
+            main.setVisible(true);
+            
+            this.dispose(); 
         }
+        else{
+            JOptionPane.showMessageDialog(null, "Wrong mail or password","", JOptionPane.ERROR_MESSAGE);
+        }
+       
     }                                           
 
+    
+    
+    
     private void mailFieldFocusLost(java.awt.event.FocusEvent evt) {                                    
         if(mailField.getText().isEmpty()){
             mailField.setText("Write Your Email");
