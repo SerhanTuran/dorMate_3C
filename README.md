@@ -11,5 +11,5 @@ This desktop application is designed for students searching for a new roommate. 
 #### How to Open Our Application
 You need to run the StartScreen class.
 #### Dependencies
-JDK
+JDK,
 NetBeans IDE
