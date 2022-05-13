@@ -12,4 +12,4 @@ This desktop application is designed for students searching for a new roommate. 
 You need to run the StartScreen class.
 #### Dependencies
 JDK
-NetBeans IDE
+*NetBeans IDE
